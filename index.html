@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MovieHub</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #111;
+            color: white;
+        }
+
+        /* ================= HEADER ================= */
+
+        header {
+            width: 100%;
+            height: 75px;
+            background-color: #1c1c1c;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 7%;
+
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            border-bottom: 1px solid #333;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #e50914;
+        }
+
+        .logo span {
+            color: white;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #e50914;
+        }
+
+        /* ================= HERO ================= */
+
+        .hero {
+            text-align: center;
+            padding: 70px 20px 40px;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 span {
+            color: #e50914;
+        }
+
+        .hero p {
+            color: #aaa;
+            font-size: 17px;
+        }
+
+        /* ================= MOVIES ================= */
+
+        .movies-section {
+            width: 86%;
+            max-width: 1200px;
+            margin: auto;
+            padding: 30px 0 70px;
+        }
+
+        .genre-title {
+            font-size: 28px;
+            margin: 40px 0 20px;
+
+            border-left: 5px solid #e50914;
+            padding-left: 12px;
+        }
+
+        .movie-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        /* ================= MOVIE CARD ================= */
+
+        .movie-card {
+            background-color: #1c1c1c;
+            border-radius: 12px;
+            overflow: hidden;
+
+            border: 1px solid #292929;
+
+            transition: 0.3s;
+        }
+
+        .movie-card:hover {
+            transform: translateY(-8px);
+
+            border-color: #e50914;
+
+            box-shadow: 0 10px 25px rgba(229, 9, 20, 0.2);
+        }
+
+        /* IMAGE */
+
+        .movie-image {
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+        }
+
+        .movie-image img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: cover;
+
+            display: block;
+
+            transition: 0.4s;
+        }
+
+        .movie-card:hover .movie-image img {
+            transform: scale(1.08);
+        }
+
+        /* MOVIE DETAILS */
+
+        .movie-content {
+            padding: 20px;
+        }
+
+        .movie-content h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .movie-content p {
+            color: #aaa;
+            line-height: 1.6;
+            font-size: 14px;
+
+            margin-bottom: 15px;
+        }
+
+        .movie-info {
+            display: flex;
+            justify-content: space-between;
+
+            font-size: 13px;
+            color: #ddd;
+        }
+
+        .genre {
+            color: #e50914;
+            font-weight: bold;
+        }
+
+        /* ================= REVIEW ================= */
+
+        .review-section {
+            background-color: #1c1c1c;
+            padding: 70px 7%;
+        }
+
+        .section-heading {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 40px;
+        }
+
+        .review-container {
+            max-width: 900px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+
+            gap: 30px;
+        }
+
+        .review-card {
+            background-color: #111;
+
+            padding: 25px;
+
+            border-radius: 12px;
+
+            border: 1px solid #333;
+        }
+
+        .review-card h3 {
+            margin-bottom: 10px;
+        }
+
+        .stars {
+            color: gold;
+            font-size: 22px;
+
+            margin-bottom: 12px;
+        }
+
+        .review-card p {
+            color: #aaa;
+            line-height: 1.6;
+        }
+
+        /* ================= CONTACT ================= */
+
+        .contact-section {
+            width: 86%;
+            max-width: 800px;
+
+            margin: auto;
+
+            padding: 70px 0;
+        }
+
+        .contact-form {
+            background-color: #1c1c1c;
+
+            padding: 30px;
+
+            border-radius: 12px;
+
+            border: 1px solid #333;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+
+            margin-bottom: 8px;
+
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+
+            width: 100%;
+
+            padding: 13px;
+
+            border: none;
+
+            border-radius: 6px;
+
+            background-color: #292929;
+
+            color: white;
+
+            outline: none;
+        }
+
+        .form-group textarea {
+            height: 130px;
+
+            resize: vertical;
+        }
+
+        .submit-btn {
+            width: 100%;
+
+            padding: 14px;
+
+            border: none;
+
+            border-radius: 6px;
+
+            background-color: #e50914;
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .submit-btn:hover {
+            background-color: #b20710;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            text-align: center;
+
+            background-color: #1c1c1c;
+
+            padding: 25px;
+
+            color: #888;
+
+            border-top: 1px solid #333;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 900px) {
+
+            .movie-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .review-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            header {
+                height: auto;
+
+                padding: 20px;
+
+                flex-direction: column;
+
+                gap: 15px;
+            }
+
+            nav ul {
+                gap: 15px;
+
+                flex-wrap: wrap;
+
+                justify-content: center;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .movie-container {
+                grid-template-columns: 1fr;
+            }
+
+            .movies-section,
+            .contact-section {
+                width: 90%;
+            }
+
+            .movie-image {
+                height: 350px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+
+    <header>
+
+        <div class="logo">
+            Movie<span>Hub</span>
+        </div>
+
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#movies">Movies</a></li>
+                <li><a href="#reviews">Reviews</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+
+    </header>
+
+
+    <!-- ================= HERO ================= -->
+
+    <section class="hero" id="home">
+
+        <h1>
+            Movies <span>by Genre</span>
+        </h1>
+
+        <p>
+            Explore movies from different genres and discover your next favorite film.
+        </p>
+
+    </section>
+
+
+    <!-- ================= MOVIES ================= -->
+
+    <section class="movies-section" id="movies">
+
+
+        <!-- ACTION -->
+
+        <h2 class="genre-title">
+            Action Movies
+        </h2>
+
+        <div class="movie-container">
+
+
+            <!-- MOVIE 1 -->
+
+            <div class="movie-card">
+
+                <div class="movie-image">
+
+                    <img
+                        src="https://jiotvimages.cdn.jio.com/imagespublic/45/2/9484ff525b3c56a49928aff7d95d4f65_1702972826604_l_medium.jpg"
+                        alt="Action Movie"
+                    >
+
+                </div>
+
+                <div class="movie-content">
+
+                    <h3>
+                        Sarrainodu
+                    </h3>
+
+                    <p>
+                        A fearless warrior fights against a powerful criminal
+                        organization to protect his city.
+                    </p>
+
+                    <div class="movie-info">
+
+                        <span class="genre">
+                            Action
+                        </span>
+
+                        <span>
+                            Release: 2025
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- MOVIE 2 -->
+
+            <div class="movie-card">
+
+                <div class="movie-image">
+
+                    <img
+                        src="https://www.bollywoodhungama.com/wp-content/uploads/2024/05/Salaar_TV_Premiere.jpeg"
+                        alt="Final Mission"
+                    >
+
+                </div>
+
+                <div class="movie-content">
+
+                    <h3>
+                        Salaar
+                    </h3>
+
+                    <p>
+                        An elite soldier gets one final mission that changes
+                        everything he believes about his past.
+                    </p>
+
+                    <div class="movie-info">
+
+                        <span class="genre">
+                            Action
+                        </span>
+
+                        <span>
+                            Release: 2024
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- MOVIE 3 -->
+
+            <div class="movie-card">
+
+                <div class="movie-image">
+
+                    <img
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvoG715Gfg0DgbN11ZESbL6M1Ox6vWZYRbA3hTXPZtUA&s=10"
+                        alt="Firestorm"
+                    >
+
+                </div>
+
+                <div class="movie-content">
+
+                    <h3>
+                        RRR
+                    </h3>
+
+                    <p>
+                        A detective races against time to stop a dangerous
+                        attack planned across the city.
+                    </p>
+
+                    <div class="movie-info">
+
+                        <span class="genre">
+                            Action
+                        </span>
+
+                        <span>
+                            Release: 2023
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= COMEDY ================= -->
+
+        <h2 class="genre-title">
+            Comedy Movies
+        </h2>
+
+        <div class="movie-container">
+
+
+            <!-- MOVIE 4 -->
+
+            <div class="movie-card">
+
+                <div class="movie-image">
+
+                    <img
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6oHUKutq21JcGf_OZPSnqYgLPJtyKXj7QyR8L1sV73A&s=10"
+                        alt="Crazy College"
+                    >
+
+                </div>
+
+                <div class="movie-content">
+
+                    <h3>
+                        Hrudaya Kalayam
+                    </h3>
+
+                    <p>
+                        Four college friends find themselves in a series of
+                        hilarious situations during their final semester.
+                    </p>
+
+                    <div class="movie-info">
+
+                        <span class="genre">
+                            Comedy
+                        </span>
+
+                        <span>
+                            Release: 2025
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- MOVIE 5 -->
+
+            <div class="movie-card">
+
+                <div class="movie-image">
+
+                    <img
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIgUg0oHztmluAi3dC2T8IQtTjfcpyq9VFjMHRr5iABQ&s=10"
+                        alt="Roommates"
+                    >
+
+                </div>
+
+                <div class="movie-content">
+
+                    <h3>
+                        jathi ratnalu
+                    </h3>
+
+                    <p>
+                        Two completely different people become roommates and
+                        turn everyday life into a comedy.
+                    </p>
+
+                    <div class="movie-info">
+
+                        <span class="genre">
+                            Comedy
+                        </span>
+
+                        <span>
+                            Release: 2024
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- MOVIE 6 -->
+
+            <div class="movie-card">
+
+                <div class="movie-image">
+
+                    <img
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkZJhHz2SDPT9U5g1Ijm9d1Cef0qQ6-XYV7ITneaWMrg&s=10"
+                        alt="Weekend Trip"
+                    >
+
+                </div>
+
+                <div class="movie-content">
+
+                    <h3>
+                        sudigaadu
+                    </h3>
+
+                    <p>
+                        A simple weekend trip turns into an unforgettable
+                        adventure for a group of friends.
+                    </p>
+
+                    <div class="movie-info">
+
+                        <span class="genre">
+                            Comedy
+                        </span>
+
+                        <span>
+                            Release: 2023
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= SCI-FI ================= -->
+
+        <h2 class="genre-title">
+            Science Fiction
+        </h2>
+
+        <div class="movie-container">
+
+
+            <!-- MOVIE 7 -->
+
+            <div class="movie-card">
+
+                <div class="movie-image">
+
+                    <img
+                        src="https://www.bollywoodhungama.com/wp-content/uploads/2024/06/Kalki-2898-AD-9.jpg"
+                        alt="Beyond Earth"
+                    >
+
+                </div>
+
+                <div class="movie-content">
+
+                    <h3>
+                        Kalki
+                    </h3>
+
+                    <p>
+                        Astronauts travel beyond the solar system and discover
+                        something that could change humanity forever.
+                    </p>
+
+                    <div class="movie-info">
+
+                        <span class="genre">
+                            Sci-Fi
+                        </span>
+
+                        <span>
+                            Release: 2025
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- MOVIE 8 -->
+
+            <div class="movie-card">
+
+                <div class="movie-image">
+
+                    <img
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1H9cvI6Nm2gRd36QuU0eWZ8RIuv3IWYhTTMJ6K1nunw&s=10"
+                        alt="Unknown Planet"
+                    >
+
+                </div>
+
+                <div class="movie-content">
+
+                    <h3>
+                        raaka
+                    </h3>
+
+                    <p>
+                        A group of explorers land on a mysterious planet
+                        where nothing is what it seems.
+                    </p>
+
+                    <div class="movie-info">
+
+                        <span class="genre">
+                            Sci-Fi
+                        </span>
+
+                        <span>
+                            Release: 2024
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- MOVIE 9 -->
+
+            <div class="movie-card">
+
+                <div class="movie-image">
+
+                    <img
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTc2LR4bvKVms4iSYdU8-PPoiZNp_awhGerXq7ChDRiBw&s=10"
+                        alt="AI Revolution"
+                    >
+
+                </div>
+
+                <div class="movie-content">
+
+                    <h3>
+                        Zombie reddy
+                    </h3>
+
+                    <p>
+                        A programmer discovers that an advanced AI has
+                        developed the ability to make its own decisions.
+                    </p>
+
+                    <div class="movie-info">
+
+                        <span class="genre">
+                            Sci-Fi
+                        </span>
+
+                        <span>
+                            Release: 2023
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= REVIEWS ================= -->
+
+    <section class="review-section" id="reviews">
+
+        <h2 class="section-heading">
+            ⭐ Ratings & Reviews
+        </h2>
+
+        <div class="review-container">
+
+            <div class="review-card">
+
+                <h3>
+                    Shadow Warrior
+                </h3>
+
+                <div class="stars">
+                    ★★★★★
+                </div>
+
+                <p>
+                    Great action sequences and an interesting story.
+                    Definitely worth watching!
+                </p>
+
+            </div>
+
+
+            <div class="review-card">
+
+                <h3>
+                    Beyond Earth
+                </h3>
+
+                <div class="stars">
+                    ★★★★☆
+                </div>
+
+                <p>
+                    The visual effects were amazing and the story kept
+                    me interested until the end.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= CONTACT ================= -->
+
+    <section class="contact-section" id="contact">
+
+        <h2 class="section-heading">
+            Review please
+        </h2>
+
+        <form class="contact-form">
+
+            <div class="form-group">
+
+                <label>
+                    Your Name
+                </label>
+
+                <input
+                    type="text"
+                    placeholder="Enter your name"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Email
+                </label>
+
+                <input
+                    type="email"
+                    placeholder="Enter your email"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Rating
+                </label>
+
+                <select>
+
+                    <option>
+                        Select Rating
+                    </option>
+
+                    <option>
+                        ★★★★★ - 5/5
+                    </option>
+
+                    <option>
+                        ★★★★☆ - 4/5
+                    </option>
+
+                    <option>
+                        ★★★☆☆ - 3/5
+                    </option>
+
+                    <option>
+                        ★★☆☆☆ - 2/5
+                    </option>
+
+                    <option>
+                        ★☆☆☆☆ - 1/5
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Your Review
+                </label>
+
+                <textarea
+                    placeholder="Write your review..."
+                    required
+                ></textarea>
+
+            </div>
+
+
+            <button class="submit-btn" type="submit">
+                Submit Review
+            </button>
+
+        </form>
+
+    </section>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <p>
+            © 2026 MovieHub | All Rights Reserved
+        </p>
+
+    </footer>
+
+</body>
+</html>
